@@ -499,10 +499,18 @@ public class CommonServlet extends HttpServlet
 	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
-	//	
+	//	This function will clearing up all the memory associated with the object "Result"
 	//Notes And KEYWORDS
 	// ******************************************************************************************************************* 									
-	// * 
+	// * 	protected void close() {
+	// Close Result Set
+	//if (result != null) {
+	//	try {
+	//		result.close();
+	//	} catch (SQLException e) {
+	//		e.printStackTrace();
+	//	}
+	//}
 	// * 
 	// * 
 	// * 
