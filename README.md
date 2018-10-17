@@ -1,6 +1,6 @@
 # Project Title
 
-One Paragraph of project description goes here
+Employee web application with authentication
 
 ## Getting Started
 
