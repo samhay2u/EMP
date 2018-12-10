@@ -237,4 +237,11 @@ td.text-right {												/*		*/
   display:table-cell;										/*		*/
   vertical-align:middle;									/*		*/
   padding:30px;												/*		*/
-}															/*		*/
+}	
+
+.text-color-employee{
+color: #0000A0;	
+	
+}
+
+														/*		*/

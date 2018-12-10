@@ -285,7 +285,7 @@ public class EmployeeServlet extends CommonServlet {
 			out.println("    <tfoot>");
 			out.println("      <tr>");
 			out.println("        <td>Total:</td>");
-			out.println("        <td colspan=\"4\">" + count + "</td>");
+			out.println("        <td colspan=\"8\">" + count + "</td>");
 			out.println("      </tr>");
 			out.println("    </tfoot>");
 			out.println("</table>");

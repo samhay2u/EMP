@@ -648,7 +648,7 @@ public class CommonServlet extends HttpServlet
 		out.println("<title>Employee Data Management System</title>");
 		out.println("</head>");
 		out.println("<body>");
-		out.println("    <a href=\"/EMP\">Logout</a>");			
+		out.println("    <a class=\"text-color-employee\"href=\"/EMP\">Logout</a>");			
 		out.println("	<h1 align=\"center\">" + title + "</h1>");
 		out.println("	  <section class=\"outer-wrapper\">"); // begining section tag
 		out.println("	    <div class=\"inner-wrapper\">");
@@ -727,7 +727,7 @@ public class CommonServlet extends HttpServlet
 		Object obj = request.getSession().getAttribute("SESSION_USER_TOKEN");
 		header("Employee Information System", obj,  out);
 		out.println("<div class=\"text-center\">");	
-		out.println("  <a href=\"/EMP/employees\">Employees</a>");
+		out.println("  <a class=\"text-color-employee\" href=\"/EMP/employees\">Employees</a>");
 		out.println("  <br/>");
 		out.println("</div>");
 		footer(out);
