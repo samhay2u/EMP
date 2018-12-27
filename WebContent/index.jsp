@@ -1,24 +1,33 @@
-<%@page import="emp.CommonServlet, emp.User"%>
+<%@page import="emp.model.UserDAO, emp.model.User"%>
 <%
-  session.removeAttribute("SESSION_USER_TOKEN");  
-  String userName = request.getParameter("user_id"); 						// get user_id from imported index.jsp form text entry area and store in string var
-  String password = request.getParameter("user_password");					// get password from imported index.jsp store in string var
-  String errorMessage = "";
-  User user = null;
-  
-  if (userName != null && password != null) {  								// if something has been typed in both text fields 
-	  CommonServlet commonServlet = new CommonServlet();					// create a new object of type commnServelt from the parrent class commonServlet
-	  user = commonServlet.validateLogin(userName, password);				// call/use java libary function... specially created for varifiying usernames and passwords
-																			// and set that equal to the empty error message variable created above
-	  if (user != null) {													// if validateLogin did not come back with an error then open the PIS start screen because 
-		  																   	// errorMessage still eqauls "" from above
-         session.setAttribute("SESSION_USER_TOKEN", user);
-	     response.sendRedirect("/EMP/start");
+session.removeAttribute("SESSION_USER_TOKEN");  
+String userName = request.getParameter("user_id"); 						// get user_id from imported index.jsp form text entry area and store in string var
+String password = request.getParameter("user_password");				// get password from imported index.jsp store in string var
+String login = request.getParameter("userSubmit");				
+String register = request.getParameter("userRegister");				
+
+String errorMessage = "";
+User user = null;
+
+if ("login".equals(login)) {  
+	  if (userName != null && password != null) {  								// if something has been typed in both text fields 
+		  UserDAO userDao = new UserDAO();					// create a new object of type commnServelt from the parrent class commonServlet
+		  user = userDao.validateLogin(userName, password);		// call/use java libary function... specially created for varifiying usernames and passwords
+																				// and set that equal to the empty error message variable created above
+		  if (user != null) {										// if validateLogin did not come back with an error then open the EMP start screen because 
+			  																   // errorMessage still eqauls "" from above
+	         session.setAttribute("SESSION_USER_TOKEN", user);
+		     response.sendRedirect("/EMP/start");
+		  }
+		  else {
+			 errorMessage = "Invalid User: " + userName;
+		  }
 	  }
-	  else {
-		 errorMessage = "Invalid User: " + userName;
-	  }
-  }
+}
+
+if ("register".equals(register)) {
+	 response.sendRedirect("register.jsp");
+}
 %>
 <!DOCTYPE html>
 <html>																													<!-- standard boiler plate header stuff 	 begin  -->
@@ -51,7 +60,9 @@
 				       <input name="user_password" type="password" id="Name" class="form-control" value="" />				<!--   -->
 				     </div>																								<!--   -->
 				     <div class="form-group text-center">																<!-- just centers the whole wrapped form experience in the middle   -->
-				       <button id="userSubmit" name="userSubmit" type="submit" class="btn btn-primary">Login</button>	<!--   -->
+				       <button id="login" name="userSubmit" type="submit" value="login" class="btn btn-primary">Login</button>	<!--   -->
+				       &nbsp;&nbsp;&nbsp;&nbsp;
+				       <button id="register" name="userRegister" type="submit" value="register" class="btn btn-primary">Register</button>	<!--   -->
 				     </div>																								<!--   -->
 			     </fieldset>																							<!--   -->
 				 </form>																								<!--   -->

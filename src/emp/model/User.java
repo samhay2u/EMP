@@ -1,4 +1,4 @@
-package emp;
+package emp.model;
 
 import java.io.Serializable;
 
