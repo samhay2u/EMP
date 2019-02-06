@@ -1,4 +1,4 @@
-<%@page import="emp.model.UserDAO, emp.model.User"%>
+<%@page import="emp.model.UserDAO,emp.pojo.User"%>
 <% 
   String firstName = request.getParameter("first_name");
   String middleName = request.getParameter("middle_name");

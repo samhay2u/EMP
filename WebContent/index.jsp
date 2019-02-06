@@ -1,6 +1,6 @@
-<%@page import="emp.model.UserDAO, emp.model.User"%>
+<%@page import="emp.model.UserDAO, emp.pojo.User, emp.CommonServlet"%>
 <%
-session.removeAttribute("SESSION_USER_TOKEN");  
+session.removeAttribute(CommonServlet.SESSION_USER_TOKEN);  
 String userName = request.getParameter("user_id"); 						// get user_id from imported index.jsp form text entry area and store in string var
 String password = request.getParameter("user_password");				// get password from imported index.jsp store in string var
 String login = request.getParameter("userSubmit");				
@@ -16,7 +16,7 @@ if ("login".equals(login)) {
 																				// and set that equal to the empty error message variable created above
 		  if (user != null) {										// if validateLogin did not come back with an error then open the EMP start screen because 
 			  																   // errorMessage still eqauls "" from above
-	         session.setAttribute("SESSION_USER_TOKEN", user);
+	         session.setAttribute(CommonServlet.SESSION_USER_TOKEN, user);
 		     response.sendRedirect("/EMP/start");
 		  }
 		  else {
