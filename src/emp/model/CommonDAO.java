@@ -26,7 +26,7 @@ public class CommonDAO {
 
 	public void connect() throws Exception {
 		Class.forName("com.mysql.jdbc.Driver"); // Register JDBC Driver
-		conn = DriverManager.getConnection("jdbc:mysql://localhost/EMPLOYEES", "EMPLOYEES", "tset");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost/employees", "employees", "tset");
 	}
 
 	public ResultSet getTableData(String tableName, String orderBy) throws Exception {
