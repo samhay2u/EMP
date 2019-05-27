@@ -1,0 +1,8 @@
+-- Develop a query that shows the top ten patient details that has spend most money on surjeries
+-- SELECT P.MedRecNo, P.Name, P.DOB, P.Address, P.Insurance, SUM(H.CostOfVist) AS TOTAL_COST FROM patienthx AS H
+-- INNER JOIN patients AS P
+-- ON H.MedRecNo = P.MedRecNo
+-- GROUP BY P.MedRecNo
+-- ORDER BY TOTAL_COST DESC, P.Name
+-- LIMIT 5
+-- other aggregate functions maybe
