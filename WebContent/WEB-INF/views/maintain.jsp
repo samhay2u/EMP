@@ -2,7 +2,7 @@
 <jsp:include page="header.jsp" />
 <%
 	String opr = request.getParameter(CommonServlet.OPR), id = "", dob = "", fname = "", lname = "",
-			gender = "", hdate = "";
+			gender = "", hdate = "", salary= ""  ;
 
 	boolean isEdit = "edit".equals(opr);
 
@@ -13,10 +13,11 @@
 
 		id = employee.getEmp_No();
 		dob = employee.getDob();
-		fname = employee.getFirst_name();
-		lname = employee.getLast_name();
+		fname = employee.getF_Name();
+		lname = employee.getL_Name();
 		gender = employee.getGender();
-		hdate = employee.getHire_date();
+		hdate = employee.getHire_Date();
+		salary = employee.getSalary();
 	}
 	/////////////////////////////////////////////////////////////////////////////// BUG
 	// because we are not wanting to reuse the cose then we put everything here for
@@ -60,8 +61,13 @@
 			<div class="form-group">
 				<label for="HireDate" class="control-label">Hire Date</label> <input
 					name="HireDate" type="text" id="HireDate" class="form-control"
-					value="<%=hdate%>" />
+					value="<%=hdate%>" />			
 			</div>
+			<div class="form-group">
+				<label for="Salary" class="control-label">Salary</label> <input
+					name="Salary" type="text" id="Salary" class="form-control"
+					value="<%=salary%>" />			
+			</div>		
 			<div class="form-group text-center">
 				<button id="employeeSubmit" name="employeeSubmit" type="submit"
 					class="btn btn-primary">Submit</button>

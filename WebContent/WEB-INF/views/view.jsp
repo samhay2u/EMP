@@ -10,7 +10,8 @@
 				<th id="FirstName">First Name</th>
 				<th id="LastName">Last Name</th>
 				<th id="Gender">Gender</th>
-				<th id="hire_date ">hire date</th>
+				<th id="hire_date ">Hire Date</th>
+				<th id="salary ">Salary</th>
 				<th id="delete">Delete</th>
 			</tr>
 		</thead>
@@ -23,10 +24,12 @@
 					// Get the data from the row
 					String id 		= employee.getEmp_No();
 					String dob 		= employee.getDob();
-					String lname 	= employee.getLast_name();
-					String fname 	= employee.getFirst_name();
+					String lname 	= employee.getL_Name();
+					String fname 	= employee.getF_Name();
 					String gender 	= employee.getGender();
-					String hdate 	= employee.getHire_date();
+					String hdate 	= employee.getHire_Date();
+					String salary 	= employee.getSalary();
+					
 			%>
 			<tr>
 				<td headers="maintain"><a
@@ -37,6 +40,7 @@
 				<td headers="LastName"><%=lname%></td>
 				<td headers="Gender"><%=gender%></td>
 				<td headers="Hire_Date"><%=hdate%></td>
+				<td headers="Salary"><%=salary%></td>
 				<td headers="delete"><a
 					href="/EMP/employees?opr=delete&emp_no=<%=id%>">Delete</a></td>
 			</tr>
@@ -47,7 +51,7 @@
 		</tbody>
 		<tfoot>
 			<tr>
-				<td class="text-center" colspan="8"><b>Total: <%=count%></b></td>
+				<td class="text-center" colspan="9"><b>Total: <%=count%></b></td>
 			</tr>
 		</tfoot>
 	</table>

@@ -30,48 +30,31 @@ import emp.util.Factory;
 /**
  * Servlet implementation class employeessServlet
  */
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
 @WebServlet(description = "This servlet will maintain employee data", urlPatterns = { "/employees" })
 
 public class EmployeeServlet extends CommonServlet {
+	private static final long serialVersionUID 	= 1L;
+	private static final String ERROR_TITLE 	= "Employee Data";
 
-	private static final long serialVersionUID = 1L;
-
-	private static final String ERROR_TITLE = "Employee Data";
-
-	// DO GET
-	// getting text from the URL
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//
-	//
-	//
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Object obj = request.getSession().getAttribute(SESSION_USER_TOKEN);
-
 		// pushes the header html out using the java function from server library
 		// classes above
 		// pushes the header html out using the java function from server library
 		// classes above
 		request.setAttribute(TITLE, "Employee Data (<a href=\"/EMP/start\">Index</a>)");
+		
 		if (obj != null) {
-			// sets up a string object and Get the operation type from the request parameter
 			String opr = request.getParameter(OPR);
 
-			// calls the add/edit based on (opr) value
 			if ("add".equals(opr) || "edit".equals(opr)) {
 				maintain(opr, request, response); // calls the add/edit form
 			}
-			// calls the delete based on (opr) value
+		
 			else if ("delete".equals(opr)) {
 				delete(request, response);
 			}
-			// calls the view based on (opr) value
+		
 			else {
 				view(request, response);
 			}
@@ -80,66 +63,37 @@ public class EmployeeServlet extends CommonServlet {
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////
-	//
-	//
-	// ....basic format a java servlet function template
-	// ....(ify_whiley_for)
-	// (try)
-	// (connect)
-	// (create)
-	// (set)
-	// (excecute)
-	// (catch)
-	// (finnaly)
-	//
-	//
-	////////////////////////////////////////////////////////////////////////////////////////////
-	public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("emp_no");
-		String message = "Employee Record Number " + id + " deleted successfully";
-		String opr = request.getParameter("opr");
 
+	public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id 				= request.getParameter("emp_no");
+		String message 			= "Employee Record Number " + id + " deleted successfully";
+		String opr 				= request.getParameter("opr");
 		EmployeeDAO employeeDAO = Factory.getEmployeeDAO(request);
+		
 		if ("delete".equals(opr)) {
 			if (!employeeDAO.delete(id)) {
-				message = "Employee Record Number " + id + " delete failed";
+				message 			= "Employee Record Number " + id + " delete failed";
 			}
 		}
 		request.setAttribute(MESSAGE, message); // Setting the message in the request attribute
-
-		// Show the updated information
 		view(request, response);
 	}
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// so it all says:
-	//
-	//
-	//
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void maintain(String opr, HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		boolean isEdit = "edit".equals(opr);
+	public void maintain(String opr, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		boolean isEdit		= "edit".equals(opr);
 
 		// if the opr html querry parametr up in the url has "opr=edit" representation
 		// then do all this below
 		if (isEdit) {
-			EmployeeDAO employeeDAO = new EmployeeDAO();
+			EmployeeDAO employeeDAO 	= new EmployeeDAO();
 			request.setAttribute(EMPLOYEE, employeeDAO.retreive(request.getParameter("emp_no")));
 		}
 
 		request.getRequestDispatcher("/WEB-INF/views/maintain.jsp").forward(request, response);
 	}
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// so it all says:
-	//
-	//
-	//
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EmployeeDAO employeeDAO = Factory.getEmployeeDAO(request);
+		EmployeeDAO employeeDAO 		= Factory.getEmployeeDAO(request);
 		request.setAttribute(EMPLOYEES, employeeDAO.retreiveAll());
 		request.getRequestDispatcher("/WEB-INF/views/view.jsp").forward(request, response);
 	}
@@ -148,47 +102,36 @@ public class EmployeeServlet extends CommonServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// so it all says:
-	//
-	//
-	//
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		Object obj = request.getSession().getAttribute(SESSION_USER_TOKEN);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		Object obj 					= request.getSession().getAttribute(SESSION_USER_TOKEN);
 
 		if (obj != null) {
-			String emp_No = request.getParameter("EmployeeNumber");
-			String message = "Data added successfully";
-			String opr = request.getParameter("opr");
-			// public Employee(String emp_No, String birth_date, String first_name, String
-			// last_name, String gender, String hire_date) {
-			Employee employee = new Employee(emp_No, request.getParameter("DOB"), request.getParameter("FirstName"),
-					request.getParameter("LastName"), request.getParameter("Gender"), request.getParameter("HireDate"));
+			String emp_No 			= request.getParameter("EmployeeNumber");
+			String message 			= "Data added successfully";
+			String opr 				= request.getParameter("opr");
+			Employee employee 		= new Employee(emp_No, request.getParameter("DOB"), request.getParameter("FirstName"),
+										request.getParameter("LastName"), request.getParameter("Gender"), request.getParameter("HireDate"), request.getParameter("Salary"));
 			EmployeeDAO employeeDAO = Factory.getEmployeeDAO(request);
+			
 			if ("addSubmit".equals(opr)) {
 
 				if (!employeeDAO.add(employee)) {
-					message = "No Data has been added";
+					message 		= "No Data has been added";
 				}
 			}
 
 			else if ("editSubmit".equals(opr)) {
-				message = "Employee Record Number " + emp_No + " edited successfully";
+				message 			= "Employee Record Number " + emp_No + " edited successfully";
 				if (!employeeDAO.edit(employee)) {
-					message = "Employee Record Number " + emp_No + " edit failed";
+					message 		= "Employee Record Number " + emp_No + " edit failed";
 				}
 			}
 
 			request.setAttribute(MESSAGE, message); // Setting the message in the request attribute
-
-			// Show the updated information
 			doGet(request, response);
+			
 		} else {
 			error(request, response, ERROR_TITLE);
 		}
 	}
-
 }

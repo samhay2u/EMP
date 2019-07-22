@@ -39,7 +39,7 @@ public class EmployeeDAO extends CommonDAO {
 			if (result.next()) {
 				employee = new Employee(result.getString("emp_no"), result.getString("birth_date"),
 						result.getString("first_name"), result.getString("last_name"), result.getString("gender"),
-						result.getString("hire_date"));
+						result.getString("hire_date"),result.getString("salary") );
 			}
 		}
 
@@ -77,7 +77,7 @@ public class EmployeeDAO extends CommonDAO {
 				// Get the data from the row
 				list.add(new Employee(result.getString("emp_no"), result.getString("birth_date"),
 						result.getString("first_name"), result.getString("last_name"), result.getString("gender"),
-						result.getString("hire_date")));
+						result.getString("hire_date"), result.getString("salary")));
 			}
 		}
 
@@ -101,16 +101,17 @@ public class EmployeeDAO extends CommonDAO {
 			// Create a database statement
 
 			PreparedStatement stmt = prepare(
-					"INSERT INTO employees(emp_no, birth_date, first_name, last_name, gender, hire_date) VALUES(?, ?, ?, ?, ?, ?)");
+					"INSERT INTO employees(emp_no, birth_date, first_name, last_name, gender, hire_date, salary) VALUES(?, ?, ?, ?, ?, ?, ?)");
 
 			// Prevent SQL Injection
 			// Bind Parameter with Parameter Markers
 			stmt.setInt(1, Integer.parseInt(employee.getEmp_No()));
 			stmt.setString(2, employee.getDob());
-			stmt.setString(3, employee.getFirst_name());
-			stmt.setString(4, employee.getLast_name());
+			stmt.setString(3, employee.getF_Name());
+			stmt.setString(4, employee.getL_Name());
 			stmt.setString(5, employee.getGender());
-			stmt.setString(6, employee.getHire_date());
+			stmt.setString(6, employee.getHire_Date());
+			stmt.setString(7, employee.getSalary());
 
 			// emp_no
 			// Execute the Select Query
@@ -137,17 +138,19 @@ public class EmployeeDAO extends CommonDAO {
 
 			// Create a database statement
 			PreparedStatement stmt = prepare(
-					"UPDATE employees SET birth_date = ?, first_name = ?, last_name = ?, gender = ?, hire_date = ? WHERE emp_no = ?");
+					"UPDATE employees SET birth_date = ?, first_name = ?, last_name = ?, gender = ?, hire_date = ?, salary = ? WHERE emp_no = ?");
 
 			// Prevent SQL Injection
 			// Bind Parameter with Parameter Markers
 
 			stmt.setString(1, employee.getDob());
-			stmt.setString(2, employee.getFirst_name());
-			stmt.setString(3, employee.getLast_name());
+			stmt.setString(2, employee.getF_Name());
+			stmt.setString(3, employee.getL_Name());
 			stmt.setString(4, employee.getGender());
-			stmt.setString(5, employee.getHire_date());
-			stmt.setInt(6, Integer.parseInt(employee.getEmp_No()));
+			stmt.setString(5, employee.getHire_Date());
+			stmt.setString(6, employee.getSalary());
+			stmt.setInt(7, Integer.parseInt(employee.getEmp_No()));
+			
 
 			// Execute the Select Query
 			isSuccess = stmt.executeUpdate() > 0;

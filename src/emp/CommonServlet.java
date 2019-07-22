@@ -37,51 +37,24 @@ import javax.servlet.http.HttpServletResponse;
 
 import emp.util.Singleton;
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////									
-//So the following statements Say:
-//
-//**
-//*  This common servlet contains common reusable methods for database
-//*/
-//
-//create a connection to the internet via @webservlet a generated webpage that is generic to the PIS project and do so by appending to
-//its url with ..../start..... 
-//then
-//extend over to this CommonServlet from the httpServlet neccessary protocols to have a web servlet that publishes to the intenet a webpage  
-//
-//variables are then set up to begin this process next
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @WebServlet(description = "This servlet will show the list of available modules", urlPatterns = { "/start" })
 public class CommonServlet extends HttpServlet implements CommonServletInterface {
 	// PRIVATE VARIABLE DECLARATIONS ONLY USEFULL WITHIN THIS FUNCTION
-	private static final long serialVersionUID = 1L; // The serialVersionUID is used as a version control in a
-														// Serializable class.
-														// If you do not explicitly declare a serialVersionUID, JVM will
-														// do it for you automatically, based
-														// on various aspects of your Serializable class, as described
-														// in the Java(TM) Object Serialization Specification.
+	private static final long serialVersionUID 		= 1L; 	// The serialVersionUID is used as a version control in a
+															// Serializable class.
+															// If you do not explicitly declare a serialVersionUID, JVM will
+															// do it for you automatically, based
+															// on various aspects of your Serializable class, as described
+															// in the Java(TM) Object Serialization Specification.
 
-	public static final String SESSION_USER_TOKEN = "sessionUserToken";
-	public static final String TITLE = "title";
-	public static final String MESSAGE = "message";
-	public static final String OPR = "opr";
+	public static final String SESSION_USER_TOKEN 	= "sessionUserToken";
+	public static final String TITLE 				= "title";
+	public static final String MESSAGE 				= "message";
+	public static final String OPR 					= "opr";
 
-	public static final String EMPLOYEES = "EMPLOYEES";
-	public static final String EMPLOYEE = "EMPLOYEE";
+	public static final String EMPLOYEES 			= "EMPLOYEES";
+	public static final String EMPLOYEE 			= "EMPLOYEE";
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// GETTER-(that then calls a setter)
-	// Passes 2 httpservlet objects... uses them to retieve the above MEM VAR
-	///////////////////////////////////////////////////////////////////////////////////////////////////////// SESSION_USER_TOKEN
-	// instantiates a holder obj to test against later
-	// calls a setter for TITLE ....calls a home.jsp and error.jsp getter if obj not
-	///////////////////////////////////////////////////////////////////////////////////////////////////////// null...forwrds
-	///////////////////////////////////////////////////////////////////////////////////////////////////////// those
-	///////////////////////////////////////////////////////////////////////////////////////////////////////// common
-	///////////////////////////////////////////////////////////////////////////////////////////////////////// "gets"
-	//
-	//
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
