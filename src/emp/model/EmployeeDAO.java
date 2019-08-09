@@ -2,12 +2,17 @@ package emp.model;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import emp.pojo.Employee;
 
+
 public class EmployeeDAO extends CommonDAO {
+
 
 	public boolean delete(String emp_no) {
 		boolean isSuccess = false;
@@ -30,6 +35,17 @@ public class EmployeeDAO extends CommonDAO {
 		return isSuccess;
 	}
 
+	
+	public String getSalary (String salary) {
+	       String pattern = "######.##";
+	       DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getNumberInstance();
+	       decimalFormat.applyLocalizedPattern(pattern);
+	       String format = decimalFormat.format(Double.valueOf(salary));
+	       System.out.println(format);	
+	       return format;
+	}
+			
+
 	public Employee retreive(String emp_no) {
 		Employee employee = null;
 		try {
@@ -39,7 +55,7 @@ public class EmployeeDAO extends CommonDAO {
 			if (result.next()) {
 				employee = new Employee(result.getString("emp_no"), result.getString("birth_date"),
 						result.getString("first_name"), result.getString("last_name"), result.getString("gender"),
-						result.getString("hire_date"),result.getString("salary") );
+						result.getString("hire_date"), getSalary(result.getString("salary")) );
 			}
 		}
 
@@ -77,7 +93,7 @@ public class EmployeeDAO extends CommonDAO {
 				// Get the data from the row
 				list.add(new Employee(result.getString("emp_no"), result.getString("birth_date"),
 						result.getString("first_name"), result.getString("last_name"), result.getString("gender"),
-						result.getString("hire_date"), result.getString("salary")));
+						result.getString("hire_date"), getSalary(result.getString("salary"))));
 			}
 		}
 
