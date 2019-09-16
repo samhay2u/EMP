@@ -4,28 +4,31 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import emp.pojo.TopFiveLastNames;
+import emp.pojo.TopFiveSalaries;
 
 public class EmpDashboardDAO extends CommonDAO{
-	/*
-	public List<TopFiveLastNames> topFiveList() {
-		List<TopFiveLastNames> list = new ArrayList<TopFiveLastNames>();
+	
+	public List<TopFiveSalaries> topFiveList() {
+		List<TopFiveSalaries> list = new ArrayList<TopFiveSalaries>();
 
 		try {
 			connect(); // Connect to the database
 	//****************************************************************		
 			// Execute the Select Query
-			ResultSet result = getResultFromQuery("SELECT P.MedRecNo, P.Name, P.DOB, P.Address, P.Insurance, SUM(H.CostOfVist) AS TOTAL_COST FROM patienthx AS H INNER JOIN patients AS P ON H.MedRecNo = P.MedRecNo GROUP BY P.MedRecNo ORDER BY TOTAL_COST DESC, P.Name LIMIT 5");
+			ResultSet result = getResultFromQuery("SELECT emp_no, birth_date, first_name, last_name, gender, "
+					+ "hire_date, salary from employees order by salary desc limit 5");
+
 			
 			// Do I have a next row
 			while (result.next()) {
 				// Get the data from the row
-				TopFiveLastNames tf = new TopFiveLastNames(result.getString("MedRecNo"), 
-			                             result.getString("Name"), 
-			                             result.getString("DOB"), 
-			                             result.getString("Address"), 
-			                             result.getString("Insurance"), 
-			                             result.getDouble("TOTAL_COST"));
+				TopFiveSalaries tf = new TopFiveSalaries(result.getString("emp_no"), 
+			                             result.getString("birth_date"), 
+			                             result.getString("first_name"), 
+			                             result.getString("last_name"), 
+			                             result.getString("hire_date"), 
+			                             result.getString("gender"),
+										 result.getString("salary"));
 				
 				list.add(tf);
 	//**************************************************************************
@@ -40,7 +43,7 @@ public class EmpDashboardDAO extends CommonDAO{
 
 		return list;
 	}
-	*/
+	
 }
 
 
