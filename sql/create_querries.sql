@@ -10,3 +10,6 @@
 -- SELECT * emp_no FROM EMPLOYEES WHERE salary in (Select salary from employees order by salary desc limit 5);
 SELECT emp_no, CONCAT (FIRST_NAME, ' ', LAST_NAME ) as fullname, birth_date, hire_date, gender, salary from employees order by salary desc limit 5 
 -- SELECT *, CONCAT(FIRSTNAME, ',', LASTNAME) AS FIRSTNAME FROM `customer`
+
+
+

@@ -15,17 +15,15 @@ public class EmpDashboardDAO extends CommonDAO{
 			connect(); // Connect to the database
 	//****************************************************************		
 			// Execute the Select Query
-			ResultSet result = getResultFromQuery("SELECT emp_no, birth_date, first_name, last_name, gender, "
-					+ "hire_date, salary from employees order by salary desc limit 5");
+			ResultSet result = getResultFromQuery("SELECT emp_no, CONCAT (FIRST_NAME, ' ', LAST_NAME ) as fullname, birth_date, hire_date, gender, salary from employees order by salary desc limit 5 ");
 
 			
 			// Do I have a next row
 			while (result.next()) {
 				// Get the data from the row
 				TopFiveSalaries tf = new TopFiveSalaries(result.getString("emp_no"), 
+						 				result.getString("fullname"),
 			                             result.getString("birth_date"), 
-			                             result.getString("first_name"), 
-			                             result.getString("last_name"), 
 			                             result.getString("hire_date"), 
 			                             result.getString("gender"),
 										 result.getString("salary"));
